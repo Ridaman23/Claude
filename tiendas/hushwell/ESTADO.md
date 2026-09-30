@@ -36,7 +36,7 @@
   crema #F7F3EC, tinta #1B2140, luna #F2DFA7
 - Tipos: Fraunces (títulos) + Inter (texto), vía Google Fonts; tipografía de Dawn: Lora + Assistant
 - Botones píldora; esquinas de 22px; cielo estrellado en CSS; animación al aparecer con el scroll; cinta de frases
-- Sin fotos IA (el usuario eligió usar sus fotos)
+- Fotos IA: SÍ (30-sep, a petición del usuario) — ver sección "Fotos IA"
 - Reseñas: NO se han puesto reseñas inventadas; añadir solo reseñas reales
 
 ## Archivos propios (prefijo hw-)
@@ -63,3 +63,15 @@
 - Foto con marca "HIEERBUS" quitada de la cinta en V
 - Políticas guardadas (envíos con plazos EE. UU. 7-14 / Canadá 8-16 días laborables, devoluciones 30 días, privacidad, términos, contacto)
 - Portada: foto "No more sleep disruption" sustituida por ilustración CSS (hw-ilus) en hw-problema
+
+## Fotos IA (30-sep-2026)
+- Generadas con gpt-image-2 (clave de OpenAI inyectada por el entorno en la nube; no hay clave guardada en el proyecto).
+  El proxy corta las peticiones a los ~30 s → el script de generación se usa en modo streaming (stream + partial_images).
+- Copias en tiendas/hushwell/fotos-ia/ (fuera del tema). Estilo: estudio sobre crema #F7F3EC con lavanda / ambiente nocturno azul noche.
+- Chin strap: hw-cs-estudio (portada de la galería), hw-hero (mujer durmiendo, luz de luna), hw-cs-lifestyle (hombre de lado), hw-cs-detalle (velcro)
+- Banda: hw-banda-estudio (azul y negra), hw-banda-lifestyle (hombre canoso durmiendo)
+- V-line: hw-vline-estudio (morado/negro/rosa), hw-vline-lifestyle (mujer en la cama)
+- Subidas a la galería de cada producto como primeras fotos (las del proveedor siguen detrás).
+- Portada: assets/hw-hero.jpg sustituida por la foto IA. Como el conector no puede escribir en el tema publicado,
+  se creó la copia "Hushwell (Claude) – fotos IA" (ID 191620579652) con la foto nueva → hay que PUBLICAR esa copia.
+- Gasto aproximado en OpenAI: ~1 $ (1 foto high, ~10 medium/low incluyendo pruebas y reintentos)
