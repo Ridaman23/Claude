@@ -2,7 +2,12 @@
   "sections": {
     "principal": {
       "type": "hw-producto",
-      "settings": {}
+      "settings": {
+        "subtitulo": "Both Hushwell styles — find your perfect fit",
+        "intro": "Not sure which style you'll prefer? Get both: the full-support chin strap and the slim adjustable band. Wear your favorite every night and keep the other for travel or wash days.",
+        "bullets": "Full-support chin strap + slim wraparound band\nSave vs. buying them separately\nHelps reduce snoring caused by mouth breathing\nBoth adjustable, washable & reusable",
+        "incluye": "1 × Hushwell anti-snoring chin strap (black)\n1 × Hushwell adjustable chin strap band (black)"
+      }
     },
     "cinta": {
       "type": "hw-marquesina",
@@ -198,10 +203,9 @@
       "settings": {
         "productos": [
           "hushwell-chin-strap-2-pack",
-          "hushwell-quiet-night-duo-chin-strap-band",
-          "hushwell-adjustable-chin-strap-band"
+          "hushwell-v-line-chin-jaw-strap"
         ],
-        "titulo": "Complete your quiet night",
+        "titulo": "You may also like",
         "eyebrow": "More from Hushwell",
         "texto": ""
       }

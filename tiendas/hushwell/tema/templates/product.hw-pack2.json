@@ -2,7 +2,12 @@
   "sections": {
     "principal": {
       "type": "hw-producto",
-      "settings": {}
+      "settings": {
+        "subtitulo": "One for you, one spare — and you save",
+        "intro": "Two Hushwell chin straps in one pack. Keep one on the nightstand and one in the wash (or your travel bag), or share with a partner who also sleeps with their mouth open.",
+        "bullets": "2 soft, adjustable chin straps in one pack\nSave vs. buying two separately\nHelps reduce snoring caused by mouth breathing\nHand washable & reusable",
+        "incluye": "2 × Hushwell anti-snoring chin strap (black)\nApprox. 60 × 19 cm / 23.6 × 7.5 in each, adjustable"
+      }
     },
     "cinta": {
       "type": "hw-marquesina",
@@ -197,11 +202,10 @@
       "type": "hw-coleccion",
       "settings": {
         "productos": [
-          "hushwell-chin-strap-2-pack",
           "hushwell-quiet-night-duo-chin-strap-band",
-          "hushwell-adjustable-chin-strap-band"
+          "hushwell-anti-snoring-chin-strap"
         ],
-        "titulo": "Complete your quiet night",
+        "titulo": "You may also like",
         "eyebrow": "More from Hushwell",
         "texto": ""
       }
