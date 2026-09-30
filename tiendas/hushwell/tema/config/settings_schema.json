@@ -1466,5 +1466,42 @@
         "label": "t:settings_schema.customer_accounts.settings.customer_account_menu.label"
       }
     ]
+  },
+  {
+    "name": "Promoción",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Muestra el precio rebajado en la web. El descuento real se crea en Shopify → Descuentos."
+      },
+      {
+        "type": "checkbox",
+        "id": "promo_activa",
+        "label": "Promoción activa",
+        "default": false
+      },
+      {
+        "type": "range",
+        "id": "promo_porcentaje",
+        "label": "Descuento (%)",
+        "min": 5,
+        "max": 70,
+        "step": 5,
+        "unit": "%",
+        "default": 20
+      },
+      {
+        "type": "text",
+        "id": "promo_fin",
+        "label": "Último día (AAAA-MM-DD)",
+        "default": "2026-10-14"
+      },
+      {
+        "type": "text",
+        "id": "promo_etiqueta",
+        "label": "Texto de la etiqueta",
+        "default": "Launch sale"
+      }
+    ]
   }
 ]

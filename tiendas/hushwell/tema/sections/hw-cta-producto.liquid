@@ -31,8 +31,7 @@
         <h2 class="hw-h2">{{ section.settings.titulo }}</h2>
         {%- if producto != blank -%}
           <div class="hw-cta__precio">
-            <span class="hw-cta__precio-num">{{ variante.price | money }}</span>
-            {%- if variante.compare_at_price > variante.price -%}<s>{{ variante.compare_at_price | money }}</s>{%- endif -%}
+            {% render 'hw-precio', precio: variante.price, antes: variante.compare_at_price, clase: 'hw-cta__precio-num' %}
           </div>
         {%- endif -%}
         <ul class="hw-cta__lista">

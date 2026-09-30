@@ -36,7 +36,7 @@
               <div class="hw-col__colores">{{ p.variants.size }} {{ section.settings.colores_texto }}</div>
             {%- endif -%}
             <div class="hw-col__pie">
-              <span class="hw-col__precio">{% if p.price_varies %}{{ section.settings.desde_texto }} {% endif %}{{ p.price | money }}</span>
+              <span class="hw-col__precios">{%- if p.price_varies -%}{%- assign d = section.settings.desde_texto -%}{%- else -%}{%- assign d = '' -%}{%- endif -%}{% render 'hw-precio', precio: p.price, antes: p.compare_at_price, clase: 'hw-col__precio', desde: d %}</span>
               <span class="hw-col__ver">{{ section.settings.boton_texto }} {% render 'hw-icono', nombre: 'flecha' %}</span>
             </div>
           </div>

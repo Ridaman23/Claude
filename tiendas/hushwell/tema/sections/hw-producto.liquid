@@ -13,7 +13,7 @@
 {% endstyle %}
 
 {%- assign variante = product.selected_or_first_available_variant -%}
-<section class="hw-prod hw-section hw-claro" style="background: {{ section.settings.color_fondo }};" data-hw-producto data-money-format="{{ shop.money_format | escape }}">
+<section class="hw-prod hw-section hw-claro" style="background: {{ section.settings.color_fondo }};" data-hw-producto data-promo="{%- if settings.promo_activa -%}{%- assign _h = 'now' | date: '%Y%m%d' | plus: 0 -%}{%- assign _f = settings.promo_fin | remove: '-' | strip | plus: 0 -%}{%- if _f == 0 or _h <= _f -%}{{ settings.promo_porcentaje }}{%- else -%}0{%- endif -%}{%- else -%}0{%- endif -%}" data-money-format="{{ shop.money_format | escape }}">
   <div class="hw-container hw-prod__grid">
 
     {%- comment -%} Galería: sigue a las fotos del catálogo {%- endcomment -%}
@@ -51,11 +51,7 @@
       {%- endif -%}
 
       <div class="hw-prod__precio">
-        <span class="hw-prod__precio-num" data-hw-precio>{{ variante.price | money }}</span>
-        <s data-hw-tachado {% unless variante.compare_at_price > variante.price %}hidden{% endunless %}>{{ variante.compare_at_price | money }}</s>
-        {%- if variante.compare_at_price > variante.price and section.settings.mostrar_ahorro -%}
-          <span class="hw-prod__ahorro">{{ section.settings.ahorro_texto }}</span>
-        {%- endif -%}
+        {% render 'hw-precio', precio: variante.price, antes: variante.compare_at_price, clase: 'hw-prod__precio-num' %}
       </div>
 
       {%- if section.settings.intro != blank -%}

@@ -1,0 +1,20 @@
+{%- comment -%}
+  Precio con promoción. Parámetros: precio (céntimos), antes (compare_at, opcional), clase (clase del número), desde (texto opcional)
+{%- endcomment -%}
+{%- assign hw_promo = false -%}
+{%- assign hw_pct = settings.promo_porcentaje | default: 0 -%}
+{%- if settings.promo_activa and hw_pct > 0 -%}
+  {%- assign hw_hoy = 'now' | date: '%Y%m%d' | plus: 0 -%}
+  {%- assign hw_fin = settings.promo_fin | remove: '-' | strip | plus: 0 -%}
+  {%- if hw_fin == 0 or hw_hoy <= hw_fin -%}{%- assign hw_promo = true -%}{%- endif -%}
+{%- endif -%}
+{%- if hw_promo -%}
+  {%- assign hw_factor = 100 | minus: hw_pct -%}
+  {%- assign hw_final = precio | times: hw_factor | divided_by: 100.0 | round -%}
+  <span class="{{ clase }}" data-hw-precio>{% if desde != blank %}{{ desde }} {% endif %}{{ hw_final | money }}</span>
+  <s class="hw-precio__antes" data-hw-tachado>{{ precio | money }}</s>
+  <span class="hw-precio__badge">-{{ hw_pct }}%</span>
+{%- else -%}
+  <span class="{{ clase }}" data-hw-precio>{% if desde != blank %}{{ desde }} {% endif %}{{ precio | money }}</span>
+  <s class="hw-precio__antes" data-hw-tachado {% unless antes > precio %}hidden{% endunless %}>{{ antes | money }}</s>
+{%- endif -%}

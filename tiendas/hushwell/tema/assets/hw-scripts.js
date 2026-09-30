@@ -65,10 +65,16 @@
           return;
         }
         inputId.value = v.id;
-        if (precio) precio.textContent = formatMoney(v.price, fmt);
-        if (tachado) {
-          if (v.compare_at_price && v.compare_at_price > v.price) { tachado.textContent = formatMoney(v.compare_at_price, fmt); tachado.hidden = false; }
-          else tachado.hidden = true;
+        var pct = parseInt(root.getAttribute('data-promo'), 10) || 0;
+        if (pct > 0) {
+          if (precio) precio.textContent = formatMoney(Math.round(v.price * (100 - pct) / 100), fmt);
+          if (tachado) { tachado.textContent = formatMoney(v.price, fmt); tachado.hidden = false; }
+        } else {
+          if (precio) precio.textContent = formatMoney(v.price, fmt);
+          if (tachado) {
+            if (v.compare_at_price && v.compare_at_price > v.price) { tachado.textContent = formatMoney(v.compare_at_price, fmt); tachado.hidden = false; }
+            else tachado.hidden = true;
+          }
         }
         if (boton) {
           boton.disabled = !v.available;

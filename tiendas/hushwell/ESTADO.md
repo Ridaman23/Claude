@@ -53,3 +53,12 @@
 - [ ] Rellenar las políticas (Configuración → Políticas) para enlazarlas desde el pie de página
 - [ ] Confirmar que ofrece envío gratis a EE. UU. y garantía de 30 noches (lo dice la web); si no, cambiar esos textos
 - [ ] Revisar la moneda de la tienda (USD) y los mercados (Configuración → Mercados)
+
+## Promociones y envío (30-sep-2026)
+- Descuento automático "Launch Sale – 20% off" (gid://shopify/DiscountAutomaticNode/1919646007620): todo el catálogo, hasta 2026-10-15 06:59 UTC (14-oct, hora EE. UU.)
+- Descuento automático "Free US shipping" (gid://shopify/DiscountAutomaticNode/1919644893508): envío gratis a EE. UU., sin fin
+- Tema: ajustes globales "Promoción" (promo_activa, promo_porcentaje=20, promo_fin=2026-10-14, promo_etiqueta);
+  snippet hw-precio muestra precio rebajado, tachado y "-20%"; se apaga solo después de promo_fin
+- Barra superior: "Launch Sale: 20% off everything — ends Oct 14 · Free US shipping" → CAMBIAR al terminar la oferta
+- Foto con marca "HIEERBUS" quitada de la cinta en V
+- Políticas redactadas (scratchpad pol.json) — pendiente de permiso write_legal_policies para guardarlas

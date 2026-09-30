@@ -280,6 +280,14 @@ h1, h2, h3, .h0, .h1, .h2 { font-family: var(--hw-serif); }
 @media (max-width: 990px) { .hw-col__grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 540px) { .hw-col__grid { grid-template-columns: 1fr; } }
 
+/* ---------- PRECIO CON PROMO ---------- */
+.hw-precio__antes { opacity: .6; font-size: .8em; margin-left: 6px; }
+.hw-precio__antes[hidden] { display: none; }
+.hw-precio__badge { display: inline-block; margin-left: 8px; background: var(--hw-lavanda); color: var(--hw-noche); border-radius: 999px; padding: 4px 10px; font: 600 12px/1.2 var(--hw-sans); vertical-align: middle; }
+.hw-hero__precios, .hw-col__precios { display: inline-flex; align-items: baseline; flex-wrap: wrap; gap: 2px; }
+.hw-col__precios .hw-precio__antes { font-size: 15px; }
+.hw-hero__precios .hw-precio__antes { color: var(--hw-crema); }
+
 /* ---------- Responsive ---------- */
 @media (max-width: 990px) {
   .hw-hero__grid, .hw-problema__grid, .hw-cta__caja, .hw-faq__grid, .hw-prod__grid { grid-template-columns: 1fr; gap: 36px; }

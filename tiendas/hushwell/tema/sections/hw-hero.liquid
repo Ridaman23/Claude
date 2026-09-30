@@ -25,7 +25,7 @@
           {{ section.settings.boton_texto }} {% render 'hw-icono', nombre: 'flecha' %}
         </a>
         {%- if producto != blank and section.settings.mostrar_precio -%}
-          <span class="hw-hero__precio-num">{{ section.settings.precio_prefijo }} {{ producto.price | money }}</span>
+          <span class="hw-hero__precios">{% render 'hw-precio', precio: producto.price, antes: producto.compare_at_price, clase: 'hw-hero__precio-num', desde: section.settings.precio_prefijo %}</span>
         {%- endif -%}
       </div>
       <ul class="hw-hero__puntos hw-reveal" data-delay="4">

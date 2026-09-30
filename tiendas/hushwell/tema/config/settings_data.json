@@ -190,7 +190,11 @@
             "color_scheme": "scheme-1"
           }
         }
-      }
+      },
+      "promo_activa": true,
+      "promo_porcentaje": 20,
+      "promo_fin": "2026-10-14",
+      "promo_etiqueta": "Launch sale"
     }
   }
 }
