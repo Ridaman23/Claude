@@ -22,6 +22,14 @@
 - 114 productos antiguos de mascotas pasados a BORRADOR (no borrados), a petición del usuario
 - Menú creado: "hushwell-menu" (Home, Chin Strap, Shipping & Returns, Contact) → usado en el header
 
+- Precios (30-sep): chin strap $31.99, banda $35.99, V-line $41.99
+- Producto 2: gid://shopify/Product/15695542812996 "Hushwell Adjustable Chin Strap Band" (hushwell-adjustable-chin-strap-band),
+  plantilla hw-banda, colores Black (6 uds) / Blue (0 uds)
+- Producto 3: gid://shopify/Product/15695542747460 "Hushwell V-Line Chin & Jaw Strap" (hushwell-v-line-chin-jaw-strap),
+  plantilla hw-vline, Purple/Black/Pink. Una foto lleva la marca de otro fabricante ("HIEERBUS")
+- Chin strap: quitadas las 2 fotos duplicadas (quedan 6)
+- Menú: Home, Shop (/collections/all), Shipping & Returns, Contact
+
 ## Brief / decisiones de diseño
 - Mercado EE. UU., inglés, USD. Nombre de marca propuesto por Claude: Hushwell
 - Estilo "noche tranquila": noche #121836 / #1B2248 / #0B1026, lavanda #C3B4F2, lila suave #EDE8F7,
@@ -35,8 +43,8 @@
 - assets/hw-styles.css, assets/hw-scripts.js, assets/hw-favicon.png, fotos hw-*.jpg
 - snippets/hw-icono.liquid
 - sections: hw-hero, hw-marquesina, hw-problema, hw-pasos, hw-beneficios, hw-comparativa,
-  hw-cta-producto, hw-faq, hw-producto
-- templates/index.json (portada), templates/product.hw.json (página de producto)
+  hw-cta-producto, hw-faq, hw-producto, hw-coleccion
+- templates/index.json (portada), templates/product.hw.json, product.hw-banda.json, product.hw-vline.json
 - Modificados de Dawn: header.liquid (ajuste brand_text), footer.liquid (reescrito), header-group.json,
   footer-group.json, layout/theme.liquid (favicon, fuentes, css/js), config/settings_data.json (colores y fuentes)
 
