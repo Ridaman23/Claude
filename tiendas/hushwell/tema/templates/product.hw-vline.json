@@ -1,0 +1,184 @@
+{
+  "sections": {
+    "principal": {
+      "type": "hw-producto",
+      "settings": {
+        "eyebrow": "Hushwell Wind-Down",
+        "subtitulo": "Your evening self-care ritual",
+        "intro": "Soft, cooling ice-silk with graphene-infused cheek panels and adjustable straps — a comfortable wrap for your chin, cheeks and jawline while you relax.",
+        "bullets": "Contoured 3D fit for chin, cheeks, jaw & neck\nGraphene-infused, silicone-coated cheek panels\nCool, breathable ice-silk fabric\nMultiple adjustable straps — stays in place",
+        "incluye": "1 × Hushwell V-line chin & jaw strap\nOne size fits most (approx. 22 in / 56 cm)",
+        "aviso": "Cosmetic accessory. Individual results vary. Not a medical device. Stop using if you feel discomfort or skin irritation."
+      }
+    },
+    "cinta": {
+      "type": "hw-marquesina",
+      "settings": {
+        "frases": "Cool ice-silk fabric\nGraphene-infused cheek panels\nAdjustable straps\nWear while you unwind\nHand washable"
+      }
+    },
+    "pasos": {
+      "type": "hw-pasos",
+      "settings": {
+        "eyebrow": "How to use",
+        "titulo": "Four easy steps",
+        "texto": "Takes less than a minute — then relax for 30 to 60 minutes."
+      },
+      "blocks": {
+        "paso-1": {
+          "type": "paso",
+          "settings": {
+            "icono": "cinta",
+            "titulo": "Unfold & fit",
+            "texto": "Unfold the strap and fit the cup under your chin."
+          }
+        },
+        "paso-2": {
+          "type": "paso",
+          "settings": {
+            "icono": "ajustar",
+            "titulo": "Secure the top strap",
+            "texto": "Place the openings over your ears and fasten the longer strap over your head."
+          }
+        },
+        "paso-3": {
+          "type": "paso",
+          "settings": {
+            "icono": "pluma",
+            "titulo": "Fasten the back",
+            "texto": "Attach the two shorter straps at the back of your head and adjust to a comfortable tightness."
+          }
+        },
+        "paso-4": {
+          "type": "paso",
+          "settings": {
+            "icono": "luna",
+            "titulo": "Relax",
+            "texto": "Read, unwind or watch a show — wear it 30–60 minutes a day as part of your routine."
+          }
+        }
+      },
+      "block_order": [
+        "paso-1",
+        "paso-2",
+        "paso-3",
+        "paso-4"
+      ]
+    },
+    "ventajas": {
+      "type": "hw-beneficios",
+      "settings": {
+        "eyebrow": "Why you'll love it",
+        "titulo": "Comfort you can feel"
+      },
+      "blocks": {
+        "ventaja-1": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "destello",
+            "titulo": "Graphene panels",
+            "texto": "Thin, silicone-coated panels sit snugly against your cheeks for a warming feel."
+          }
+        },
+        "ventaja-2": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "pluma",
+            "titulo": "Ice-silk fabric",
+            "texto": "Cool, silky and breathable — keeps you comfortable and dry."
+          }
+        },
+        "ventaja-3": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "ajustar",
+            "titulo": "Custom fit",
+            "texto": "Multiple hook-and-loop straps let you choose exactly how firm it feels."
+          }
+        },
+        "ventaja-4": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "lavar",
+            "titulo": "Washable",
+            "texto": "Keeps its shape and stretch wash after wash."
+          }
+        }
+      },
+      "block_order": [
+        "ventaja-1",
+        "ventaja-2",
+        "ventaja-3",
+        "ventaja-4"
+      ]
+    },
+    "faq": {
+      "type": "hw-faq",
+      "settings": {},
+      "blocks": {
+        "pregunta-1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "How long should I wear it?",
+            "respuesta": "<p>30–60 minutes a day is a good routine. Wear it while you read, relax or unwind in the evening.</p>"
+          }
+        },
+        "pregunta-2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "Will it fit me?",
+            "respuesta": "<p>One size fits most adults. The adjustable straps let you set the fit for your face shape.</p>"
+          }
+        },
+        "pregunta-3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "Can I sleep in it?",
+            "respuesta": "<p>It's designed for relaxing and unwinding. If you want something for snoring during the night, our chin straps are made for that.</p>"
+          }
+        },
+        "pregunta-4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "How do I clean it?",
+            "respuesta": "<p>Hand wash in cool water with mild soap and let it air dry.</p>"
+          }
+        },
+        "pregunta-5": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "What if it's not for me?",
+            "respuesta": "<p>Contact us within 30 days and we'll make it right.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "pregunta-1",
+        "pregunta-2",
+        "pregunta-3",
+        "pregunta-4",
+        "pregunta-5"
+      ]
+    },
+    "coleccion": {
+      "type": "hw-coleccion",
+      "settings": {
+        "productos": [
+          "hushwell-anti-snoring-chin-strap",
+          "hushwell-adjustable-chin-strap-band"
+        ],
+        "titulo": "Rest easier tonight",
+        "eyebrow": "From the sleep collection",
+        "texto": ""
+      }
+    }
+  },
+  "order": [
+    "principal",
+    "cinta",
+    "pasos",
+    "ventajas",
+    "faq",
+    "coleccion"
+  ]
+}

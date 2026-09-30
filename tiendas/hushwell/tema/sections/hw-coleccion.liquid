@@ -1,0 +1,75 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-col__cabecera { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-col__grid { gap: {{ section.settings.separacion }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+<section class="hw-col hw-section hw-lila" id="shop" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container">
+    <div class="hw-col__cabecera">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal" style="color:#6B58C9">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="hw-muted hw-reveal" data-delay="2">{{ section.settings.texto | newline_to_br }}</p>{%- endif -%}
+    </div>
+    <div class="hw-col__grid">
+      {%- for p in section.settings.productos -%}
+        {%- assign v = p.selected_or_first_available_variant -%}
+        <a class="hw-col__card hw-reveal" data-delay="{{ forloop.index | at_most: 4 }}" href="{{ p.url }}">
+          <div class="hw-col__foto">
+            {%- if p.featured_image -%}
+              {{ p.featured_image | image_url: width: 800 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 33vw, 100vw', alt: p.title }}
+            {%- endif -%}
+            {%- unless p.available -%}<span class="hw-col__etiqueta">{{ section.settings.agotado_texto }}</span>{%- endunless -%}
+          </div>
+          <div class="hw-col__info">
+            <h3 class="hw-h3">{{ p.title }}</h3>
+            {%- if p.variants.size > 1 -%}
+              <div class="hw-col__colores">{{ p.variants.size }} {{ section.settings.colores_texto }}</div>
+            {%- endif -%}
+            <div class="hw-col__pie">
+              <span class="hw-col__precio">{% if p.price_varies %}{{ section.settings.desde_texto }} {% endif %}{{ p.price | money }}</span>
+              <span class="hw-col__ver">{{ section.settings.boton_texto }} {% render 'hw-icono', nombre: 'flecha' %}</span>
+            </div>
+          </div>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Colección",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "The collection" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Find your perfect fit" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Three ways to rest easier — pick the one that suits you." },
+    { "type": "product_list", "id": "productos", "label": "Productos", "limit": 6 },
+    { "type": "text", "id": "boton_texto", "label": "Texto del enlace", "default": "View" },
+    { "type": "text", "id": "desde_texto", "label": "Texto 'desde'", "default": "From" },
+    { "type": "text", "id": "colores_texto", "label": "Texto tras el número de opciones", "default": "colors" },
+    { "type": "text", "id": "agotado_texto", "label": "Etiqueta de agotado", "default": "Sold out" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#EDE8F7" },
+    { "type": "header", "content": "Tipografía y diseño" },
+    { "type": "select", "id": "text_align", "label": "Alineación de la cabecera", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "center" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "separacion", "label": "Separación entre tarjetas (px)", "min": 8, "max": 48, "step": 2, "unit": "px", "default": 24 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "presets": [{ "name": "HW – Colección" }]
+}
+{% endschema %}

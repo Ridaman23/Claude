@@ -192,6 +192,18 @@
         "pregunta-4",
         "pregunta-5"
       ]
+    },
+    "coleccion": {
+      "type": "hw-coleccion",
+      "settings": {
+        "productos": [
+          "hushwell-adjustable-chin-strap-band",
+          "hushwell-v-line-chin-jaw-strap"
+        ],
+        "titulo": "You may also like",
+        "eyebrow": "More from Hushwell",
+        "texto": ""
+      }
     }
   },
   "order": [
@@ -200,6 +212,7 @@
     "pasos",
     "ventajas",
     "comparativa",
-    "faq"
+    "faq",
+    "coleccion"
   ]
 }
