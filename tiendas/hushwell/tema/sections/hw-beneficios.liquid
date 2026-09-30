@@ -1,0 +1,79 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-benef__cabecera { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-benef p { font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+<section class="hw-benef-sec hw-section hw-lila" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container">
+    <div class="hw-benef__cabecera">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal" style="color:#6B58C9">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="hw-muted hw-reveal" data-delay="2">{{ section.settings.texto | newline_to_br }}</p>{%- endif -%}
+    </div>
+    <div class="hw-benef__grid">
+      {%- for block in section.blocks -%}
+        <div class="hw-benef hw-reveal" data-delay="{{ forloop.index | at_most: 4 }}" {{ block.shopify_attributes }}>
+          <div class="hw-benef__icono">{% render 'hw-icono', nombre: block.settings.icono %}</div>
+          <h3 class="hw-h3">{{ block.settings.titulo }}</h3>
+          <p class="hw-muted">{{ block.settings.texto | newline_to_br }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Ventajas",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Why Hushwell" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Made to disappear once you fall asleep" },
+    { "type": "textarea", "id": "texto", "label": "Texto" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#EDE8F7" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación de la cabecera", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "center" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto de las tarjetas (px)", "min": 13, "max": 22, "step": 1, "unit": "px", "default": 15 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "ventaja",
+      "name": "Ventaja",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [
+          { "value": "pluma", "label": "Pluma" }, { "value": "ajustar", "label": "Ajustar" }, { "value": "aire", "label": "Aire" },
+          { "value": "lavar", "label": "Gota" }, { "value": "luna", "label": "Luna" }, { "value": "corazon", "label": "Corazón" },
+          { "value": "cinta", "label": "Cinta" }, { "value": "dormir", "label": "Dormir" }, { "value": "destello", "label": "Destello" }
+        ], "default": "pluma" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Feather-light" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Soft, stretchy fabric you'll forget you're wearing." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HW – Ventajas",
+    "blocks": [
+      { "type": "ventaja", "settings": { "icono": "pluma", "titulo": "Soft & breathable", "texto": "Lightweight, stretchy fabric that sits comfortably against your skin all night." } },
+      { "type": "ventaja", "settings": { "icono": "ajustar", "titulo": "Adjustable fit", "texto": "Hook-and-loop closure lets you set exactly how snug it feels." } },
+      { "type": "ventaja", "settings": { "icono": "aire", "titulo": "Nose breathing", "texto": "Gently supports your jaw so your mouth stays closed and you breathe through your nose." } },
+      { "type": "ventaja", "settings": { "icono": "lavar", "titulo": "Easy to care for", "texto": "Hand wash with mild soap, air dry, and it's ready for tonight." } }
+    ]
+  }]
+}
+{% endschema %}

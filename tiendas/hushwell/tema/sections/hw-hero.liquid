@@ -1,0 +1,92 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h1 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-hero__texto { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-hero__sub { font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h1 { font-size: {{ section.settings.heading_size | times: 0.62 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+{%- assign producto = section.settings.producto -%}
+<section class="hw-hero hw-section hw-oscuro hw-estrellas" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container hw-hero__grid">
+    <div class="hw-hero__texto">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h1 class="hw-h1 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h1>
+      <p class="hw-hero__sub hw-muted hw-reveal" data-delay="2">{{ section.settings.subtitulo | newline_to_br }}</p>
+      <div class="hw-hero__precio hw-reveal" data-delay="3">
+        <a class="hw-btn hw-btn--luz" href="{{ section.settings.boton_url | default: producto.url | default: '/collections/all' }}">
+          {{ section.settings.boton_texto }} {% render 'hw-icono', nombre: 'flecha' %}
+        </a>
+        {%- if producto != blank and section.settings.mostrar_precio -%}
+          <span class="hw-hero__precio-num">{{ section.settings.precio_prefijo }} {{ producto.price | money }}</span>
+        {%- endif -%}
+      </div>
+      <ul class="hw-hero__puntos hw-reveal" data-delay="4">
+        {%- for i in (1..3) -%}
+          {%- capture k %}punto_{{ i }}{% endcapture -%}
+          {%- if section.settings[k] != blank -%}
+            <li>{% render 'hw-icono', nombre: 'check' %}{{ section.settings[k] }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div class="hw-hero__media hw-reveal" data-delay="2">
+      <div class="hw-hero__halo"></div>
+      <div class="hw-hero__foto">
+        {%- if section.settings.imagen != blank -%}
+          {{ section.settings.imagen | image_url: width: 1400 | image_tag: loading: 'eager', fetchpriority: 'high', sizes: '(min-width: 990px) 45vw, 100vw', alt: section.settings.imagen.alt }}
+        {%- else -%}
+          <img src="{{ 'hw-hero.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" width="800" height="800" loading="eager" fetchpriority="high">
+        {%- endif -%}
+      </div>
+      {%- if section.settings.chapa_texto != blank -%}
+        <div class="hw-hero__chapa">
+          <span class="hw-hero__chapa-icono">{% render 'hw-icono', nombre: 'luna' %}</span>
+          <span>{{ section.settings.chapa_texto }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Portada principal",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Textos" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Sleep better tonight" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Quiet nights start with your jaw." },
+    { "type": "textarea", "id": "subtitulo", "label": "Subtítulo", "default": "A soft, adjustable chin strap that gently keeps your mouth closed while you sleep — so you breathe through your nose and wake up rested." },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Shop the strap" },
+    { "type": "url", "id": "boton_url", "label": "Enlace del botón (vacío = producto elegido)" },
+    { "type": "product", "id": "producto", "label": "Producto (para el precio y el enlace)" },
+    { "type": "checkbox", "id": "mostrar_precio", "label": "Mostrar precio junto al botón", "default": true },
+    { "type": "text", "id": "precio_prefijo", "label": "Texto antes del precio", "default": "Only" },
+    { "type": "text", "id": "punto_1", "label": "Ventaja 1", "default": "One size fits most" },
+    { "type": "text", "id": "punto_2", "label": "Ventaja 2", "default": "Soft & breathable" },
+    { "type": "text", "id": "punto_3", "label": "Ventaja 3", "default": "No pills, no sprays" },
+    { "type": "header", "content": "Imagen" },
+    { "type": "image_picker", "id": "imagen", "label": "Foto principal" },
+    { "type": "text", "id": "chapa_texto", "label": "Etiqueta flotante sobre la foto", "default": "Designed for mouth-breathing snorers" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#121836" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación del texto", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "left" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 28, "max": 96, "step": 2, "unit": "px", "default": 68 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del subtítulo (px)", "min": 14, "max": 26, "step": 1, "unit": "px", "default": 19 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "presets": [{ "name": "HW – Portada principal" }]
+}
+{% endschema %}

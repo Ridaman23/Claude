@@ -1,0 +1,44 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+    color: {{ section.settings.color_texto }};
+  }
+  #shopify-section-{{ section.id }} .hw-marquee__pista { --hw-vel: {{ section.settings.velocidad }}s; }
+  #shopify-section-{{ section.id }} .hw-marquee__item { font-size: {{ section.settings.text_size }}px; }
+{% endstyle %}
+
+{%- assign frases = section.settings.frases | newline_to_br | split: '<br />' -%}
+<section class="hw-marquee hw-section" aria-label="{{ section.settings.frases | strip_newlines | escape }}">
+  <div class="hw-marquee__pista" aria-hidden="true">
+    {%- for vuelta in (1..2) -%}
+      {%- for i in (1..2) -%}
+        {%- for f in frases -%}
+          {%- assign t = f | strip -%}
+          {%- if t != blank -%}
+            <span class="hw-marquee__item">{{ t }} {% render 'hw-icono', nombre: 'destello' %}</span>
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Cinta de frases",
+  "tag": "div",
+  "settings": [
+    { "type": "textarea", "id": "frases", "label": "Frases (una por línea)", "default": "Breathe through your nose\nAdjustable hook-and-loop fit\nSoft, breathable fabric\nHand washable\nOne size fits most" },
+    { "type": "range", "id": "velocidad", "label": "Duración de una vuelta (segundos, más = más lento)", "min": 10, "max": 90, "step": 5, "unit": "s", "default": 35 },
+    { "type": "range", "id": "text_size", "label": "Tamaño del texto (px)", "min": 12, "max": 32, "step": 1, "unit": "px", "default": 19 },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#C3B4F2" },
+    { "type": "color", "id": "color_texto", "label": "Color del texto", "default": "#121836" },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 20 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 80, "step": 2, "unit": "px", "default": 20 }
+  ],
+  "presets": [{ "name": "HW – Cinta de frases" }]
+}
+{% endschema %}

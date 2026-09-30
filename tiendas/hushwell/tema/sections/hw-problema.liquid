@@ -1,0 +1,83 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-problema__texto { text-align: {{ section.settings.text_align }}; font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+  {%- if section.settings.imagen_derecha -%}
+  @media (min-width: 991px) { #shopify-section-{{ section.id }} .hw-problema__foto { order: 2; } }
+  {%- endif -%}
+{% endstyle %}
+
+<section class="hw-problema hw-section hw-claro" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container hw-problema__grid">
+    <div class="hw-problema__foto hw-reveal">
+      {%- if section.settings.imagen != blank -%}
+        {{ section.settings.imagen | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw' }}
+      {%- else -%}
+        <img src="{{ 'hw-antes-despues.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" width="800" height="800" loading="lazy">
+      {%- endif -%}
+    </div>
+    <div class="hw-problema__texto">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h2>
+      <p class="hw-muted hw-reveal" data-delay="2">{{ section.settings.texto | newline_to_br }}</p>
+      <ul class="hw-problema__lista">
+        {%- for block in section.blocks -%}
+          <li class="hw-reveal" data-delay="{{ forloop.index | at_most: 4 }}" {{ block.shopify_attributes }}>
+            <span class="hw-num">{{ forloop.index }}</span>
+            <span><strong>{{ block.settings.titulo }}</strong>{% if block.settings.texto != blank %}<br><span class="hw-muted">{{ block.settings.texto }}</span>{% endif %}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – El problema",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Why you snore" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "When your mouth drops open, the snoring starts." },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "As you fall asleep, your jaw relaxes and your mouth falls open. Air rushes over the soft tissue at the back of your throat — and it vibrates. That's the sound keeping the whole room awake." },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+    { "type": "checkbox", "id": "imagen_derecha", "label": "Imagen a la derecha (en ordenador)", "default": false },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#F7F3EC" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación del texto", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "left" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto (px)", "min": 13, "max": 24, "step": 1, "unit": "px", "default": 17 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "punto",
+      "name": "Punto de la lista",
+      "settings": [
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Dry mouth every morning" },
+        { "type": "text", "id": "texto", "label": "Texto" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HW – El problema",
+    "blocks": [
+      { "type": "punto", "settings": { "titulo": "Dry mouth & sore throat every morning" } },
+      { "type": "punto", "settings": { "titulo": "Waking up tired after a full night" } },
+      { "type": "punto", "settings": { "titulo": "A partner sleeping in the other room" } }
+    ]
+  }]
+}
+{% endschema %}

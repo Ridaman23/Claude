@@ -1,0 +1,84 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-cta__texto { text-align: {{ section.settings.text_align }}; font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+{%- assign producto = section.settings.producto -%}
+{%- assign variante = producto.selected_or_first_available_variant -%}
+<section class="hw-cta hw-section hw-oscuro" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container">
+    <div class="hw-cta__caja hw-estrellas hw-reveal">
+      <div class="hw-cta__foto">
+        {%- if section.settings.imagen != blank -%}
+          {{ section.settings.imagen | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        {%- elsif producto.featured_image -%}
+          {{ producto.featured_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          <img src="{{ 'hw-producto.jpg' | asset_url }}" alt="" width="800" height="800" loading="lazy">
+        {%- endif -%}
+      </div>
+      <div class="hw-cta__texto">
+        {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+        <h2 class="hw-h2">{{ section.settings.titulo }}</h2>
+        {%- if producto != blank -%}
+          <div class="hw-cta__precio">
+            <span class="hw-cta__precio-num">{{ variante.price | money }}</span>
+            {%- if variante.compare_at_price > variante.price -%}<s>{{ variante.compare_at_price | money }}</s>{%- endif -%}
+          </div>
+        {%- endif -%}
+        <ul class="hw-cta__lista">
+          {%- assign lineas = section.settings.lista | newline_to_br | split: '<br />' -%}
+          {%- for l in lineas -%}{%- assign t = l | strip -%}{%- if t != blank -%}<li>{% render 'hw-icono', nombre: 'check' %}{{ t }}</li>{%- endif -%}{%- endfor -%}
+        </ul>
+        {%- if producto != blank and section.settings.anadir_directo -%}
+          {% form 'product', producto %}
+            <input type="hidden" name="id" value="{{ variante.id }}">
+            <button type="submit" name="add" class="hw-btn hw-btn--luz" {% unless variante.available %}disabled{% endunless %}>
+              {%- if variante.available -%}{{ section.settings.boton_texto }}{%- else -%}{{ section.settings.agotado_texto }}{%- endif -%}
+            </button>
+          {% endform %}
+        {%- else -%}
+          <a class="hw-btn hw-btn--luz" href="{{ section.settings.boton_url | default: producto.url | default: '/collections/all' }}">{{ section.settings.boton_texto }} {% render 'hw-icono', nombre: 'flecha' %}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Llamada a comprar",
+  "tag": "div",
+  "settings": [
+    { "type": "product", "id": "producto", "label": "Producto" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen (vacío = foto del producto)" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Tonight could be quieter" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Give your nights back." },
+    { "type": "textarea", "id": "lista", "label": "Lista de ventajas (una por línea)", "default": "Soft, adjustable, one size fits most\nFree US shipping\n30-night comfort guarantee" },
+    { "type": "checkbox", "id": "anadir_directo", "label": "El botón añade directamente al carrito", "default": false },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Get my Hushwell" },
+    { "type": "text", "id": "agotado_texto", "label": "Texto si está agotado", "default": "Sold out" },
+    { "type": "url", "id": "boton_url", "label": "Enlace del botón (vacío = producto)" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#121836" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación del texto", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "left" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 48 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto (px)", "min": 13, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 96 }
+  ],
+  "presets": [{ "name": "HW – Llamada a comprar" }]
+}
+{% endschema %}

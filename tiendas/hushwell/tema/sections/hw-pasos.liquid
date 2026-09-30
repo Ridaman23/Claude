@@ -1,0 +1,79 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-pasos__cabecera { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-paso p { font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+<section class="hw-pasos hw-section hw-oscuro hw-estrellas" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container">
+    <div class="hw-pasos__cabecera">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="hw-muted hw-reveal" data-delay="2">{{ section.settings.texto | newline_to_br }}</p>{%- endif -%}
+    </div>
+    <div class="hw-pasos__grid">
+      {%- for block in section.blocks -%}
+        <div class="hw-paso hw-reveal" data-delay="{{ forloop.index | at_most: 4 }}" {{ block.shopify_attributes }}>
+          <span class="hw-paso__num">0{{ forloop.index }}</span>
+          <span class="hw-paso__icono">{% render 'hw-icono', nombre: block.settings.icono %}</span>
+          <h3 class="hw-h3">{{ block.settings.titulo }}</h3>
+          <p class="hw-muted">{{ block.settings.texto | newline_to_br }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Cómo funciona",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "How it works" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Three steps to a quieter night" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "No gadgets to charge, nothing to swallow. Just a soft strap that does one job well." },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#121836" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación de la cabecera", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "center" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto de los pasos (px)", "min": 13, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "paso",
+      "name": "Paso",
+      "settings": [
+        { "type": "select", "id": "icono", "label": "Icono", "options": [
+          { "value": "cinta", "label": "Cinta" }, { "value": "ajustar", "label": "Ajustar" }, { "value": "dormir", "label": "Dormir" },
+          { "value": "luna", "label": "Luna" }, { "value": "aire", "label": "Aire" }, { "value": "pluma", "label": "Pluma" },
+          { "value": "lavar", "label": "Gota" }, { "value": "corazon", "label": "Corazón" }, { "value": "destello", "label": "Destello" }
+        ], "default": "cinta" },
+        { "type": "text", "id": "titulo", "label": "Título", "default": "Slip it on" },
+        { "type": "textarea", "id": "texto", "label": "Texto", "default": "Place the cup under your chin and the strap over the crown of your head." }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HW – Cómo funciona",
+    "blocks": [
+      { "type": "paso", "settings": { "icono": "cinta", "titulo": "Slip it on", "texto": "Rest the cup under your chin and bring the straps up over the top of your head." } },
+      { "type": "paso", "settings": { "icono": "ajustar", "titulo": "Adjust the fit", "texto": "Tighten the hook-and-loop closure until your mouth stays gently closed — snug, never tight." } },
+      { "type": "paso", "settings": { "icono": "dormir", "titulo": "Sleep quietly", "texto": "Your mouth stays closed, you breathe through your nose, and the room stays quiet." } }
+    ]
+  }]
+}
+{% endschema %}

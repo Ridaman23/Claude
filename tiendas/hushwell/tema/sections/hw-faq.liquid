@@ -1,0 +1,75 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-faq__intro { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-faq__resp { font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+<section class="hw-faq hw-section hw-claro" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container hw-faq__grid">
+    <div class="hw-faq__intro hw-reveal">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2">{{ section.settings.titulo }}</h2>
+      {%- if section.settings.texto != blank -%}<p class="hw-muted">{{ section.settings.texto | newline_to_br }}</p>{%- endif -%}
+    </div>
+    <div class="hw-reveal" data-delay="1">
+      {%- for block in section.blocks -%}
+        <details class="hw-faq__item" {{ block.shopify_attributes }}{% if forloop.first and section.settings.abrir_primera %} open{% endif %}>
+          <summary>{{ block.settings.pregunta }}<span class="hw-faq__mas">{% render 'hw-icono', nombre: 'mas' %}</span></summary>
+          <div class="hw-faq__resp">{{ block.settings.respuesta }}</div>
+        </details>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Preguntas frecuentes",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "FAQ" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "Questions, answered" },
+    { "type": "textarea", "id": "texto", "label": "Texto", "default": "Still wondering? Write to us any time — a real person replies." },
+    { "type": "checkbox", "id": "abrir_primera", "label": "Primera pregunta abierta", "default": true },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#F7F3EC" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación de la cabecera", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "left" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "range", "id": "body_size", "label": "Tamaño de las respuestas (px)", "min": 13, "max": 22, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "pregunta",
+      "name": "Pregunta",
+      "settings": [
+        { "type": "text", "id": "pregunta", "label": "Pregunta", "default": "Will it fit me?" },
+        { "type": "richtext", "id": "respuesta", "label": "Respuesta", "default": "<p>Yes — it's adjustable and fits most adults.</p>" }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HW – Preguntas frecuentes",
+    "blocks": [
+      { "type": "pregunta", "settings": { "pregunta": "Will it work for my snoring?", "respuesta": "<p>It's designed for people who snore because their mouth falls open during sleep. If your snoring comes from another cause, it may help less. Loud snoring with pauses in breathing or gasping can be a sign of sleep apnea — please talk to your doctor.</p>" } },
+      { "type": "pregunta", "settings": { "pregunta": "Will it fit me?", "respuesta": "<p>One size fits most adults. The hook-and-loop closure adjusts so you can make it as snug or relaxed as you like.</p>" } },
+      { "type": "pregunta", "settings": { "pregunta": "Is it comfortable to sleep in?", "respuesta": "<p>It's made from soft, lightweight, breathable fabric. Most people need a night or two to get used to it — start slightly loose and adjust from there.</p>" } },
+      { "type": "pregunta", "settings": { "pregunta": "How do I clean it?", "respuesta": "<p>Hand wash in cool water with mild soap and let it air dry. Avoid the dryer so it keeps its stretch.</p>" } },
+      { "type": "pregunta", "settings": { "pregunta": "What if it's not for me?", "respuesta": "<p>Sleep on it for 30 nights. If you're not happy, contact us and we'll make it right.</p>" } }
+    ]
+  }]
+}
+{% endschema %}

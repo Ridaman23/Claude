@@ -1,0 +1,48 @@
+# Estado del proyecto — Hushwell (antes "MŌA Pets")
+
+- Tienda: jib2y1-i4.myshopify.com
+- Carpeta de trabajo: tiendas/hushwell/tema (tema base Dawn 16.0.0, descargado 2026-09-30)
+- Tema de trabajo: "Hushwell (Claude)", ID 191618580804 (NO publicado)
+- Vista previa: https://jib2y1-i4.myshopify.com/?preview_theme_id=191618580804
+- Tema publicado actual: "MŌA Pets – NYC Boutique (EN)" (ID 191526961476), sin tocar
+- Entorno (nube): Node 22, Shopify CLI 4.8.3. Ejecutar el CLI con NODE_USE_ENV_PROXY=1.
+  Hay que crear un /usr/local/bin/xdg-open vacío para que el inicio de sesión no falle.
+- Red permitida: *.myshopify.com, cdn.shopify.com, accounts.shopify.com, admin.shopify.com
+
+## Fases
+- [x] 0 Entorno  - [x] 1 Conexión  - [x] 2 Proyecto  - [x] 3 Brief
+- [x] 4 Construcción  - [x] 5 Producto y páginas  - [x] 6 Subido (sin publicar, a la espera del OK)
+
+## Catálogo
+- Producto único: gid://shopify/Product/15695532196164
+  - Título: "Hushwell Anti-Snoring Chin Strap"; handle: hushwell-anti-snoring-chin-strap (redirección desde el anterior)
+  - Precio $15.99, variante "Black", 84 uds. Proveedor: Hushwell. Tipo: Sleep Aid
+  - Descripción + SEO escritos en inglés. templateSuffix = "hw" (plantilla product.hw.json)
+  - 8 fotos del proveedor; las 3 últimas son idénticas (candidatas a borrar)
+- 114 productos antiguos de mascotas pasados a BORRADOR (no borrados), a petición del usuario
+- Menú creado: "hushwell-menu" (Home, Chin Strap, Shipping & Returns, Contact) → usado en el header
+
+## Brief / decisiones de diseño
+- Mercado EE. UU., inglés, USD. Nombre de marca propuesto por Claude: Hushwell
+- Estilo "noche tranquila": noche #121836 / #1B2248 / #0B1026, lavanda #C3B4F2, lila suave #EDE8F7,
+  crema #F7F3EC, tinta #1B2140, luna #F2DFA7
+- Tipos: Fraunces (títulos) + Inter (texto), vía Google Fonts; tipografía de Dawn: Lora + Assistant
+- Botones píldora; esquinas de 22px; cielo estrellado en CSS; animación al aparecer con el scroll; cinta de frases
+- Sin fotos IA (el usuario eligió usar sus fotos)
+- Reseñas: NO se han puesto reseñas inventadas; añadir solo reseñas reales
+
+## Archivos propios (prefijo hw-)
+- assets/hw-styles.css, assets/hw-scripts.js, assets/hw-favicon.png, fotos hw-*.jpg
+- snippets/hw-icono.liquid
+- sections: hw-hero, hw-marquesina, hw-problema, hw-pasos, hw-beneficios, hw-comparativa,
+  hw-cta-producto, hw-faq, hw-producto
+- templates/index.json (portada), templates/product.hw.json (página de producto)
+- Modificados de Dawn: header.liquid (ajuste brand_text), footer.liquid (reescrito), header-group.json,
+  footer-group.json, layout/theme.liquid (favicon, fuentes, css/js), config/settings_data.json (colores y fuentes)
+
+## Pendiente del lado del usuario
+- [ ] Cambiar el nombre de la tienda a "Hushwell" (Configuración → Detalles de la tienda)
+- [ ] Rellenar las políticas (Configuración → Políticas) para enlazarlas desde el pie de página
+- [ ] Confirmar que ofrece envío gratis a EE. UU. y garantía de 30 noches (lo dice la web); si no, cambiar esos textos
+- [ ] Revisar la moneda de la tienda (USD) y los mercados (Configuración → Mercados)
+- [ ] Dar el OK para publicar el tema

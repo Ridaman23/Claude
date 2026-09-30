@@ -1,0 +1,247 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hw-hero",
+      "settings": {
+        "producto": "hushwell-anti-snoring-chin-strap"
+      }
+    },
+    "cinta": {
+      "type": "hw-marquesina",
+      "settings": {}
+    },
+    "problema": {
+      "type": "hw-problema",
+      "settings": {},
+      "blocks": {
+        "punto-1": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Dry mouth & sore throat every morning",
+            "texto": ""
+          }
+        },
+        "punto-2": {
+          "type": "punto",
+          "settings": {
+            "titulo": "Waking up tired after a full night",
+            "texto": ""
+          }
+        },
+        "punto-3": {
+          "type": "punto",
+          "settings": {
+            "titulo": "A partner sleeping in the other room",
+            "texto": ""
+          }
+        }
+      },
+      "block_order": [
+        "punto-1",
+        "punto-2",
+        "punto-3"
+      ]
+    },
+    "pasos": {
+      "type": "hw-pasos",
+      "settings": {},
+      "blocks": {
+        "paso-1": {
+          "type": "paso",
+          "settings": {
+            "icono": "cinta",
+            "titulo": "Slip it on",
+            "texto": "Rest the cup under your chin and bring the straps up over the top of your head."
+          }
+        },
+        "paso-2": {
+          "type": "paso",
+          "settings": {
+            "icono": "ajustar",
+            "titulo": "Adjust the fit",
+            "texto": "Tighten the hook-and-loop closure until your mouth stays gently closed — snug, never tight."
+          }
+        },
+        "paso-3": {
+          "type": "paso",
+          "settings": {
+            "icono": "dormir",
+            "titulo": "Sleep quietly",
+            "texto": "Your mouth stays closed, you breathe through your nose, and the room stays quiet."
+          }
+        }
+      },
+      "block_order": [
+        "paso-1",
+        "paso-2",
+        "paso-3"
+      ]
+    },
+    "ventajas": {
+      "type": "hw-beneficios",
+      "settings": {},
+      "blocks": {
+        "ventaja-1": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "pluma",
+            "titulo": "Soft & breathable",
+            "texto": "Lightweight, stretchy fabric that sits comfortably against your skin all night."
+          }
+        },
+        "ventaja-2": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "ajustar",
+            "titulo": "Adjustable fit",
+            "texto": "Hook-and-loop closure lets you set exactly how snug it feels."
+          }
+        },
+        "ventaja-3": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "aire",
+            "titulo": "Nose breathing",
+            "texto": "Gently supports your jaw so your mouth stays closed and you breathe through your nose."
+          }
+        },
+        "ventaja-4": {
+          "type": "ventaja",
+          "settings": {
+            "icono": "lavar",
+            "titulo": "Easy to care for",
+            "texto": "Hand wash with mild soap, air dry, and it's ready for tonight."
+          }
+        }
+      },
+      "block_order": [
+        "ventaja-1",
+        "ventaja-2",
+        "ventaja-3",
+        "ventaja-4"
+      ]
+    },
+    "comparativa": {
+      "type": "hw-comparativa",
+      "settings": {},
+      "blocks": {
+        "fila-1": {
+          "type": "fila",
+          "settings": {
+            "fila": "Reusable night after night",
+            "v1": true,
+            "v2": false,
+            "v3": false
+          }
+        },
+        "fila-2": {
+          "type": "fila",
+          "settings": {
+            "fila": "Nothing sticky on your skin",
+            "v1": true,
+            "v2": false,
+            "v3": true
+          }
+        },
+        "fila-3": {
+          "type": "fila",
+          "settings": {
+            "fila": "Drug-free",
+            "v1": true,
+            "v2": true,
+            "v3": false
+          }
+        },
+        "fila-4": {
+          "type": "fila",
+          "settings": {
+            "fila": "Adjustable fit",
+            "v1": true,
+            "v2": false,
+            "v3": false
+          }
+        },
+        "fila-5": {
+          "type": "fila",
+          "settings": {
+            "fila": "Washable",
+            "v1": true,
+            "v2": false,
+            "v3": false
+          }
+        }
+      },
+      "block_order": [
+        "fila-1",
+        "fila-2",
+        "fila-3",
+        "fila-4",
+        "fila-5"
+      ]
+    },
+    "cta": {
+      "type": "hw-cta-producto",
+      "settings": {
+        "producto": "hushwell-anti-snoring-chin-strap"
+      }
+    },
+    "faq": {
+      "type": "hw-faq",
+      "settings": {},
+      "blocks": {
+        "pregunta-1": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "Will it work for my snoring?",
+            "respuesta": "<p>It's designed for people who snore because their mouth falls open during sleep. If your snoring comes from another cause, it may help less. Loud snoring with pauses in breathing or gasping can be a sign of sleep apnea — please talk to your doctor.</p>"
+          }
+        },
+        "pregunta-2": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "Will it fit me?",
+            "respuesta": "<p>One size fits most adults. The hook-and-loop closure adjusts so you can make it as snug or relaxed as you like.</p>"
+          }
+        },
+        "pregunta-3": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "Is it comfortable to sleep in?",
+            "respuesta": "<p>It's made from soft, lightweight, breathable fabric. Most people need a night or two to get used to it — start slightly loose and adjust from there.</p>"
+          }
+        },
+        "pregunta-4": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "How do I clean it?",
+            "respuesta": "<p>Hand wash in cool water with mild soap and let it air dry. Avoid the dryer so it keeps its stretch.</p>"
+          }
+        },
+        "pregunta-5": {
+          "type": "pregunta",
+          "settings": {
+            "pregunta": "What if it's not for me?",
+            "respuesta": "<p>Sleep on it for 30 nights. If you're not happy, contact us and we'll make it right.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "pregunta-1",
+        "pregunta-2",
+        "pregunta-3",
+        "pregunta-4",
+        "pregunta-5"
+      ]
+    }
+  },
+  "order": [
+    "hero",
+    "cinta",
+    "problema",
+    "pasos",
+    "ventajas",
+    "comparativa",
+    "cta",
+    "faq"
+  ]
+}

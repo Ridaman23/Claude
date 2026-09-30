@@ -1,0 +1,21 @@
+{
+  "name": "t:sections.footer.name",
+  "type": "footer",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "settings": {
+        "marca": "Hushwell",
+        "nav_1_texto": "Chin strap",
+        "nav_1_url": "shopify://products/hushwell-anti-snoring-chin-strap",
+        "nav_2_texto": "Shipping & returns",
+        "nav_2_url": "/policies/shipping-policy",
+        "nav_3_texto": "Contact",
+        "nav_3_url": "/pages/contact"
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}

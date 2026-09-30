@@ -1,0 +1,100 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-footer__grid { text-align: {{ section.settings.text_align }}; }
+  #shopify-section-{{ section.id }} .hw-footer p, #shopify-section-{{ section.id }} .hw-footer li { font-size: {{ section.settings.body_size }}px; }
+{% endstyle %}
+
+<footer class="hw-footer hw-section" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container">
+    <div class="hw-footer__grid">
+      <div>
+        <div class="hw-footer__marca">
+          {%- if section.settings.logo != blank -%}
+            {{ section.settings.logo | image_url: width: 400 | image_tag: width: section.settings.logo_width, loading: 'lazy', alt: shop.name }}
+          {%- else -%}
+            <img src="{{ 'hw-favicon.png' | asset_url }}" alt="" width="34" height="34" loading="lazy" style="border-radius:8px">
+            <span>{{ section.settings.marca }}</span>
+          {%- endif -%}
+        </div>
+        <p>{{ section.settings.lema | newline_to_br }}</p>
+        {%- if section.settings.email != blank -%}
+          <p style="margin-top:14px"><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+        {%- endif -%}
+      </div>
+      <div>
+        <h2 class="hw-footer__titulo">{{ section.settings.titulo_nav }}</h2>
+        <ul>
+          {%- for i in (1..5) -%}
+            {%- capture kl %}nav_{{ i }}_texto{% endcapture -%}
+            {%- capture ku %}nav_{{ i }}_url{% endcapture -%}
+            {%- if section.settings[kl] != blank -%}
+              <li><a href="{{ section.settings[ku] | default: '#' }}">{{ section.settings[kl] }}</a></li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      </div>
+      <div>
+        <h2 class="hw-footer__titulo">{{ section.settings.titulo_sobre }}</h2>
+        <p>{{ section.settings.texto_sobre | newline_to_br }}</p>
+      </div>
+    </div>
+    <div class="hw-footer__abajo">
+      <div>© {{ 'now' | date: '%Y' }} {{ section.settings.marca }}. {{ section.settings.derechos }}</div>
+      <div class="hw-footer__legales">
+        <a href="/policies/privacy-policy">Privacy</a>
+        <a href="/policies/terms-of-service">Terms</a>
+        <a href="/policies/refund-policy">Refunds</a>
+        <a href="/policies/shipping-policy">Shipping</a>
+      </div>
+      {%- if section.settings.mostrar_pagos -%}
+        <ul class="hw-footer__pagos" aria-label="Payment methods">
+          {%- for type in shop.enabled_payment_types -%}<li>{{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Pie de página",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Marca" },
+    { "type": "image_picker", "id": "logo", "label": "Logo (opcional)" },
+    { "type": "range", "id": "logo_width", "label": "Ancho del logo (px)", "min": 60, "max": 260, "step": 10, "unit": "px", "default": 140 },
+    { "type": "text", "id": "marca", "label": "Nombre de la marca", "default": "Hushwell" },
+    { "type": "textarea", "id": "lema", "label": "Frase de la marca", "default": "Quiet nights, rested mornings.\nSimple sleep essentials that just work." },
+    { "type": "text", "id": "email", "label": "Correo de contacto" },
+    { "type": "header", "content": "Enlaces" },
+    { "type": "text", "id": "titulo_nav", "label": "Título de la columna", "default": "Shop" },
+    { "type": "text", "id": "nav_1_texto", "label": "Enlace 1 – texto", "default": "Chin strap" },
+    { "type": "url", "id": "nav_1_url", "label": "Enlace 1 – dirección" },
+    { "type": "text", "id": "nav_2_texto", "label": "Enlace 2 – texto", "default": "FAQ" },
+    { "type": "url", "id": "nav_2_url", "label": "Enlace 2 – dirección" },
+    { "type": "text", "id": "nav_3_texto", "label": "Enlace 3 – texto", "default": "Contact" },
+    { "type": "url", "id": "nav_3_url", "label": "Enlace 3 – dirección" },
+    { "type": "text", "id": "nav_4_texto", "label": "Enlace 4 – texto" },
+    { "type": "url", "id": "nav_4_url", "label": "Enlace 4 – dirección" },
+    { "type": "text", "id": "nav_5_texto", "label": "Enlace 5 – texto" },
+    { "type": "url", "id": "nav_5_url", "label": "Enlace 5 – dirección" },
+    { "type": "header", "content": "Sobre la marca" },
+    { "type": "text", "id": "titulo_sobre", "label": "Título", "default": "Our promise" },
+    { "type": "textarea", "id": "texto_sobre", "label": "Texto", "default": "Try Hushwell for 30 nights. If it's not helping you sleep better, reach out and we'll make it right." },
+    { "type": "text", "id": "derechos", "label": "Texto de derechos", "default": "All rights reserved." },
+    { "type": "checkbox", "id": "mostrar_pagos", "label": "Mostrar iconos de pago", "default": true },
+    { "type": "header", "content": "Estilo" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#0B1026" },
+    { "type": "select", "id": "text_align", "label": "Alineación", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }
+    ], "default": "left" },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto (px)", "min": 12, "max": 20, "step": 1, "unit": "px", "default": 15 },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 72 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 32 }
+  ]
+}
+{% endschema %}

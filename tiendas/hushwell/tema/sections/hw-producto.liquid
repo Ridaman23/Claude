@@ -1,0 +1,186 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-prod__titulo { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-prod__info { text-align: {{ section.settings.text_align }}; font-size: {{ section.settings.body_size }}px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-prod__titulo { font-size: {{ section.settings.heading_size | times: 0.78 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.5 | round }}px; }
+  }
+{% endstyle %}
+
+{%- assign variante = product.selected_or_first_available_variant -%}
+<section class="hw-prod hw-section hw-claro" style="background: {{ section.settings.color_fondo }};" data-hw-producto data-money-format="{{ shop.money_format | escape }}">
+  <div class="hw-container hw-prod__grid">
+
+    {%- comment -%} Galería: sigue a las fotos del catálogo {%- endcomment -%}
+    <div class="hw-prod__galeria">
+      <div class="hw-prod__principal">
+        {%- if product.featured_media -%}
+          <img data-hw-principal
+               src="{{ product.featured_media | image_url: width: 1400 }}"
+               alt="{{ product.featured_media.alt | default: product.title | escape }}"
+               width="1400" height="1400" loading="eager" fetchpriority="high">
+        {%- else -%}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      {%- assign fotos = product.media | where: 'media_type', 'image' -%}
+      {%- if fotos.size > 1 -%}
+        <div class="hw-prod__minis">
+          {%- for m in fotos -%}
+            <button type="button" class="hw-prod__mini" data-hw-mini
+                    data-src="{{ m | image_url: width: 1400 }}" data-alt="{{ m.alt | default: product.title | escape }}"
+                    aria-label="{{ 'Photo' }} {{ forloop.index }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+              <img src="{{ m | image_url: width: 200 }}" alt="" width="200" height="200" loading="lazy">
+            </button>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Columna de compra {%- endcomment -%}
+    <div class="hw-prod__info">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h1 class="hw-h1 hw-prod__titulo">{{ product.title }}</h1>
+      {%- if section.settings.subtitulo != blank -%}
+        <div class="hw-prod__valor"><span>{% render 'hw-icono', nombre: 'luna' %}</span>{{ section.settings.subtitulo }}</div>
+      {%- endif -%}
+
+      <div class="hw-prod__precio">
+        <span class="hw-prod__precio-num" data-hw-precio>{{ variante.price | money }}</span>
+        <s data-hw-tachado {% unless variante.compare_at_price > variante.price %}hidden{% endunless %}>{{ variante.compare_at_price | money }}</s>
+        {%- if variante.compare_at_price > variante.price and section.settings.mostrar_ahorro -%}
+          <span class="hw-prod__ahorro">{{ section.settings.ahorro_texto }}</span>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.intro != blank -%}
+        <p class="hw-prod__intro">{{ section.settings.intro | newline_to_br }}</p>
+      {%- endif -%}
+
+      {%- assign bullets = section.settings.bullets | newline_to_br | split: '<br />' -%}
+      <ul class="hw-prod__bullets">
+        {%- for b in bullets -%}{%- assign t = b | strip -%}{%- if t != blank -%}<li>{% render 'hw-icono', nombre: 'check' %}<span>{{ t }}</span></li>{%- endif -%}{%- endfor -%}
+      </ul>
+
+      {% form 'product', product, class: 'hw-prod__form' %}
+        <input type="hidden" name="id" value="{{ variante.id }}">
+
+        {%- unless product.has_only_default_variant -%}
+          {%- for opcion in product.options_with_values -%}
+            <div class="hw-prod__opcion">
+              <label for="hw-opcion-{{ section.id }}-{{ forloop.index }}">{{ opcion.name }}</label>
+              <select id="hw-opcion-{{ section.id }}-{{ forloop.index }}" data-hw-opcion>
+                {%- for valor in opcion.values -%}
+                  <option value="{{ valor | escape }}" {% if opcion.selected_value == valor %}selected{% endif %}>{{ valor }}</option>
+                {%- endfor -%}
+              </select>
+            </div>
+          {%- endfor -%}
+          <script type="application/json" data-hw-variantes>
+            [{%- for v in product.variants -%}{"id": {{ v.id }}, "price": {{ v.price }}, "compare_at_price": {{ v.compare_at_price | default: 0 }}, "available": {{ v.available }}, "options": {{ v.options | json }}}{% unless forloop.last %},{% endunless %}{%- endfor -%}]
+          </script>
+        {%- endunless -%}
+
+        <div class="hw-prod__compra">
+          {%- if section.settings.mostrar_cantidad -%}
+            <div class="hw-prod__cantidad">
+              <button type="button" data-hw-cant-btn="-1" aria-label="-">−</button>
+              <input type="number" name="quantity" value="1" min="1" data-hw-cantidad aria-label="Quantity">
+              <button type="button" data-hw-cant-btn="1" aria-label="+">+</button>
+            </div>
+          {%- endif -%}
+          <button type="submit" name="add" class="hw-btn hw-btn--noche" data-hw-boton
+                  data-texto="{{ section.settings.boton_texto | escape }}" data-agotado="{{ section.settings.agotado_texto | escape }}"
+                  {% unless variante.available %}disabled{% endunless %}>
+            <span>{%- if variante.available -%}{{ section.settings.boton_texto }}{%- else -%}{{ section.settings.agotado_texto }}{%- endif -%}</span>
+          </button>
+        </div>
+        {%- if section.settings.pago_rapido -%}
+          <div style="margin-top:12px">{{ form | payment_button }}</div>
+        {%- endif -%}
+      {% endform %}
+
+      <div class="hw-prod__confianza">
+        <div>{% render 'hw-icono', nombre: 'envio' %}{{ section.settings.confianza_1 }}</div>
+        <div>{% render 'hw-icono', nombre: 'devolucion' %}{{ section.settings.confianza_2 }}</div>
+        <div>{% render 'hw-icono', nombre: 'candado' %}{{ section.settings.confianza_3 }}</div>
+      </div>
+
+      <div class="hw-prod__detalles">
+        <details {% if section.settings.abrir_descripcion %}open{% endif %}>
+          <summary>{{ section.settings.titulo_descripcion }}</summary>
+          <div class="hw-prod__detalle-cuerpo">{{ product.description }}</div>
+        </details>
+        {%- if section.settings.incluye != blank -%}
+          <details>
+            <summary>{{ section.settings.titulo_incluye }}</summary>
+            <div class="hw-prod__detalle-cuerpo">
+              <ul>
+                {%- assign items = section.settings.incluye | newline_to_br | split: '<br />' -%}
+                {%- for it in items -%}{%- assign t = it | strip -%}{%- if t != blank -%}<li>{{ t }}</li>{%- endif -%}{%- endfor -%}
+              </ul>
+            </div>
+          </details>
+        {%- endif -%}
+        {%- if section.settings.envio_texto != blank -%}
+          <details>
+            <summary>{{ section.settings.titulo_envio }}</summary>
+            <div class="hw-prod__detalle-cuerpo">{{ section.settings.envio_texto }}</div>
+          </details>
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.aviso != blank -%}
+        <p class="hw-prod__aviso">{{ section.settings.aviso }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Producto",
+  "tag": "div",
+  "settings": [
+    { "type": "header", "content": "Textos principales" },
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Hushwell Sleep" },
+    { "type": "text", "id": "subtitulo", "label": "Frase bajo el título", "default": "For quieter nights and better mornings" },
+    { "type": "textarea", "id": "intro", "label": "Introducción", "default": "A soft, adjustable chin strap that gently keeps your mouth closed while you sleep, so you breathe through your nose — and snore less." },
+    { "type": "textarea", "id": "bullets", "label": "Puntos clave (uno por línea)", "default": "Helps reduce snoring caused by mouth breathing\nSoft, breathable, lightweight fabric\nAdjustable hook-and-loop fit — one size fits most\nHand washable & reusable" },
+    { "type": "header", "content": "Compra" },
+    { "type": "text", "id": "boton_texto", "label": "Texto del botón", "default": "Add to cart" },
+    { "type": "text", "id": "agotado_texto", "label": "Texto si está agotado", "default": "Sold out" },
+    { "type": "checkbox", "id": "mostrar_cantidad", "label": "Mostrar selector de cantidad", "default": true },
+    { "type": "checkbox", "id": "pago_rapido", "label": "Mostrar botón de pago rápido", "default": false },
+    { "type": "checkbox", "id": "mostrar_ahorro", "label": "Mostrar etiqueta de ahorro (si hay precio tachado)", "default": true },
+    { "type": "text", "id": "ahorro_texto", "label": "Texto de la etiqueta de ahorro", "default": "Save today" },
+    { "type": "header", "content": "Garantías" },
+    { "type": "text", "id": "confianza_1", "label": "Garantía 1", "default": "Free US shipping" },
+    { "type": "text", "id": "confianza_2", "label": "Garantía 2", "default": "30-night guarantee" },
+    { "type": "text", "id": "confianza_3", "label": "Garantía 3", "default": "Secure checkout" },
+    { "type": "header", "content": "Desplegables" },
+    { "type": "text", "id": "titulo_descripcion", "label": "Título de la descripción", "default": "Description" },
+    { "type": "checkbox", "id": "abrir_descripcion", "label": "Descripción abierta al cargar", "default": false },
+    { "type": "text", "id": "titulo_incluye", "label": "Título de 'qué incluye'", "default": "What's in the box" },
+    { "type": "textarea", "id": "incluye", "label": "Qué incluye (uno por línea)", "default": "1 × Hushwell anti-snoring chin strap (black)\nApprox. 60 × 19 cm / 23.6 × 7.5 in, adjustable" },
+    { "type": "text", "id": "titulo_envio", "label": "Título de envíos", "default": "Shipping & returns" },
+    { "type": "richtext", "id": "envio_texto", "label": "Texto de envíos y devoluciones", "default": "<p>Free shipping on all US orders. Not sleeping better? Contact us within 30 nights and we'll make it right.</p>" },
+    { "type": "text", "id": "aviso", "label": "Aviso pequeño al final", "default": "Not a medical device. Not intended to treat sleep apnea. If you have loud snoring with pauses in breathing, please consult your doctor." },
+    { "type": "header", "content": "Estilo" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#F7F3EC" },
+    { "type": "select", "id": "text_align", "label": "Alineación del texto", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }
+    ], "default": "left" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 60, "step": 2, "unit": "px", "default": 40 },
+    { "type": "range", "id": "body_size", "label": "Tamaño del texto (px)", "min": 13, "max": 20, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 48 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
+  ]
+}
+{% endschema %}

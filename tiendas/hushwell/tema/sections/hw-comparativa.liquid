@@ -1,0 +1,93 @@
+{% style %}
+  #shopify-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.color_fondo }};
+  }
+  #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size }}px; }
+  #shopify-section-{{ section.id }} .hw-comp__cabecera { text-align: {{ section.settings.text_align }}; max-width: 680px; margin: 0 auto 46px; }
+  @media (max-width: 749px) {
+    #shopify-section-{{ section.id }} .hw-h2 { font-size: {{ section.settings.heading_size | times: 0.7 | round }}px; }
+    #shopify-section-{{ section.id }} { padding-top: {{ section.settings.padding_top | times: 0.6 | round }}px; padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round }}px; }
+  }
+{% endstyle %}
+
+<section class="hw-comp hw-section hw-claro" style="background: {{ section.settings.color_fondo }};">
+  <div class="hw-container" style="max-width: 960px;">
+    <div class="hw-comp__cabecera">
+      {%- if section.settings.eyebrow != blank -%}<div class="hw-eyebrow hw-reveal">{{ section.settings.eyebrow }}</div>{%- endif -%}
+      <h2 class="hw-h2 hw-reveal" data-delay="1">{{ section.settings.titulo }}</h2>
+    </div>
+    <div class="hw-comp__scroll hw-reveal" data-delay="2">
+      <table class="hw-comp__tabla">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="hw-comp__nuestro">{{ section.settings.col_1 }}</th>
+            <th scope="col">{{ section.settings.col_2 }}</th>
+            <th scope="col">{{ section.settings.col_3 }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr {{ block.shopify_attributes }}>
+              <td>{{ block.settings.fila }}</td>
+              {%- for n in (1..3) -%}
+                {%- capture k %}v{{ n }}{% endcapture -%}
+                <td{% if n == 1 %} class="hw-comp__nuestro"{% endif %}>
+                  {%- if block.settings[k] -%}<span class="hw-comp__si" aria-label="Sí">{% render 'hw-icono', nombre: 'check' %}</span>
+                  {%- else -%}<span class="hw-comp__no" aria-label="No">{% render 'hw-icono', nombre: 'x' %}</span>{%- endif -%}
+                </td>
+              {%- endfor -%}
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "HW – Comparativa",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Compare" },
+    { "type": "text", "id": "titulo", "label": "Título", "default": "The simple fix, side by side" },
+    { "type": "text", "id": "col_1", "label": "Columna 1 (la tuya)", "default": "Hushwell" },
+    { "type": "text", "id": "col_2", "label": "Columna 2", "default": "Mouth tape" },
+    { "type": "text", "id": "col_3", "label": "Columna 3", "default": "Sprays & pills" },
+    { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#F7F3EC" },
+    { "type": "header", "content": "Tipografía" },
+    { "type": "select", "id": "text_align", "label": "Alineación de la cabecera", "options": [
+      { "value": "left", "label": "Izquierda" }, { "value": "center", "label": "Centro" }, { "value": "right", "label": "Derecha" }
+    ], "default": "center" },
+    { "type": "range", "id": "heading_size", "label": "Tamaño del título (px)", "min": 22, "max": 72, "step": 2, "unit": "px", "default": 46 },
+    { "type": "header", "content": "Espaciado" },
+    { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 },
+    { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 200, "step": 8, "unit": "px", "default": 112 }
+  ],
+  "blocks": [
+    {
+      "type": "fila",
+      "name": "Fila",
+      "settings": [
+        { "type": "text", "id": "fila", "label": "Característica", "default": "Reusable" },
+        { "type": "checkbox", "id": "v1", "label": "Columna 1 lo tiene", "default": true },
+        { "type": "checkbox", "id": "v2", "label": "Columna 2 lo tiene", "default": false },
+        { "type": "checkbox", "id": "v3", "label": "Columna 3 lo tiene", "default": false }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "HW – Comparativa",
+    "blocks": [
+      { "type": "fila", "settings": { "fila": "Reusable night after night", "v1": true, "v2": false, "v3": false } },
+      { "type": "fila", "settings": { "fila": "Nothing sticky on your skin", "v1": true, "v2": false, "v3": true } },
+      { "type": "fila", "settings": { "fila": "Drug-free", "v1": true, "v2": true, "v3": false } },
+      { "type": "fila", "settings": { "fila": "Adjustable fit", "v1": true, "v2": false, "v3": false } },
+      { "type": "fila", "settings": { "fila": "Washable", "v1": true, "v2": false, "v3": false } }
+    ]
+  }]
+}
+{% endschema %}
