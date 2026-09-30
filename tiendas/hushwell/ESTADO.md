@@ -3,7 +3,8 @@
 - Tienda: jib2y1-i4.myshopify.com
 - Carpeta de trabajo: tiendas/hushwell/tema (tema base Dawn 16.0.0, descargado 2026-09-30)
 - Tema publicado: "Hushwell (Claude) – fotos IA", ID 191620579652 (publicado por el usuario 30-sep). El anterior "Hushwell (Claude)" (191618580804) queda como copia.
-- Borrador pendiente de publicar: "Hushwell – garantía y reseñas", ID 191620940100 (= publicado + cambios de reseñas/garantía)
+- "Hushwell – garantía y reseñas" (191620940100) PUBLICADO por el usuario (30-sep noche).
+- Borrador pendiente de publicar: "Hushwell – packs", ID 191621235012 (= publicado + plantillas de packs)
 - El conector de Shopify NO puede escribir en el tema publicado: duplicar → editar la copia → el usuario publica.
   themeFilesUpsert con type URL no aplica cambios en archivos de texto; usar type TEXT y comprobar checksumMd5.
 - Vista previa: https://jib2y1-i4.myshopify.com/?preview_theme_id=191618580804
@@ -92,3 +93,13 @@
   textos de anuncio en inglés, imágenes verticales 9:16 con IA, instalar la app de TikTok (píxel) en Shopify,
   proponer pack de 2 uds para subir lo que deja cada pedido.
 - Reglas: sin promesas médicas, sin antes/después, sin testimonios inventados.
+
+## Packs (30-sep-2026, noche)
+- Creados con productBundleCreate (stock enlazado a los productos sueltos), en BORRADOR y ya añadidos al canal Tienda online:
+  - "Hushwell Chin Strap – 2 Pack" gid://shopify/Product/15695576858948 (hushwell-chin-strap-2-pack), 54,99 $ (antes 63,98), plantilla hw-pack2
+  - "Hushwell Quiet Night Duo – Chin Strap + Band" gid://shopify/Product/15695576891716 (hushwell-quiet-night-duo-chin-strap-band),
+    57,99 $ (antes 67,98), solo banda negra (la azul tiene 0 uds), plantilla hw-duo. Stock limitado a 6 por la banda.
+- Fotos IA: fotos-ia/hw-pack2.jpg, hw-duo.jpg (+ fotos de ambiente reutilizadas)
+- Página de la mentonera: sección "Complete your quiet night" con 2-pack, duo y banda (los borradores no se muestran)
+- El descuento de lanzamiento del 20 % también se aplica a los packs.
+- Pasos del usuario: 1) publicar tema "Hushwell – packs"  2) activar los 2 packs (Productos → estado Activo)
