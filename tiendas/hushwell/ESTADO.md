@@ -2,7 +2,10 @@
 
 - Tienda: jib2y1-i4.myshopify.com
 - Carpeta de trabajo: tiendas/hushwell/tema (tema base Dawn 16.0.0, descargado 2026-09-30)
-- Tema: "Hushwell (Claude)", ID 191618580804 — PUBLICADO (30-sep-2026). Los push siguientes necesitan --allow-live
+- Tema publicado: "Hushwell (Claude) – fotos IA", ID 191620579652 (publicado por el usuario 30-sep). El anterior "Hushwell (Claude)" (191618580804) queda como copia.
+- Borrador pendiente de publicar: "Hushwell – garantía y reseñas", ID 191620940100 (= publicado + cambios de reseñas/garantía)
+- El conector de Shopify NO puede escribir en el tema publicado: duplicar → editar la copia → el usuario publica.
+  themeFilesUpsert con type URL no aplica cambios en archivos de texto; usar type TEXT y comprobar checksumMd5.
 - Vista previa: https://jib2y1-i4.myshopify.com/?preview_theme_id=191618580804
 - Tema anterior guardado: "MŌA Pets – NYC Boutique (EN)" (ID 191526961476)
 - Entorno (nube): Node 22, Shopify CLI 4.8.3. Ejecutar el CLI con NODE_USE_ENV_PROXY=1.
@@ -75,3 +78,10 @@
 - Portada: assets/hw-hero.jpg sustituida por la foto IA. Como el conector no puede escribir en el tema publicado,
   se creó la copia "Hushwell (Claude) – fotos IA" (ID 191620579652) con la foto nueva → hay que PUBLICAR esa copia.
 - Gasto aproximado en OpenAI: ~1 $ (1 foto high, ~10 medium/low incluyendo pruebas y reintentos)
+
+## Reseñas y confianza (30-sep-2026)
+- NO reseñas inventadas (FTC: prohibidas en EE. UU. desde 2024). Plan: app Judge.me (gratis) para reseñas reales.
+- hw-producto: estrellas bajo el título solo si hay reseñas reales (metacampos reviews.rating / reviews.rating_count),
+  hueco para bloques de apps (@app) bajo el precio, caja "30-night sleep guarantee" y logos de pago. Todo editable.
+  El CSS nuevo va en {% stylesheet %} dentro de la propia sección.
+- Pendiente usuario: instalar Judge.me y publicar el borrador 191620940100.

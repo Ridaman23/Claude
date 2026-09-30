@@ -168,6 +168,21 @@
   </div>
 </section>
 
+{% stylesheet %}
+.hw-prod__estrellas { display: inline-flex; align-items: center; gap: 10px; margin: -2px 0 14px; font-size: 14px; color: var(--hw-tinta-suave); text-decoration: none; }
+.hw-prod__estrellas:hover span:last-child { text-decoration: underline; }
+.hw-estrellas-nota { position: relative; display: inline-block; font-size: 17px; letter-spacing: 2px; line-height: 1; color: rgba(27, 33, 64, .18); }
+.hw-estrellas-nota::before { content: '★★★★★'; position: absolute; inset: 0; width: var(--nota, 100%); overflow: hidden; color: #E0B94F; white-space: nowrap; }
+.hw-prod__app { margin: -8px 0 18px; }
+.hw-prod__garantia { display: flex; gap: 14px; align-items: flex-start; margin-top: 16px; padding: 16px 18px; border-radius: 18px; background: var(--hw-lila, #EDE8F7); border: 1px solid rgba(107, 88, 201, .18); }
+.hw-prod__garantia-icono { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--hw-noche); color: var(--hw-luna); display: grid; place-items: center; }
+.hw-prod__garantia-icono svg { width: 18px; height: 18px; }
+.hw-prod__garantia strong { display: block; font-size: 15px; margin-bottom: 2px; }
+.hw-prod__garantia p { margin: 0; font-size: 14px; line-height: 1.5; color: var(--hw-tinta-suave); }
+.hw-prod__pagos { list-style: none; padding: 0; margin: 16px 0 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
+.hw-prod__pagos svg { width: 38px; height: 24px; display: block; }
+{% endstylesheet %}
+
 {% schema %}
 {
   "name": "HW – Producto",
