@@ -85,3 +85,10 @@
   hueco para bloques de apps (@app) bajo el precio, caja "30-night sleep guarantee" y logos de pago. Todo editable.
   El CSS nuevo va en {% stylesheet %} dentro de la propia sección.
 - Pendiente usuario: instalar Judge.me y publicar el borrador 191620940100.
+
+## Próxima sesión: anuncios (acordado 30-sep)
+- Empezar por TikTok Ads (solo EE. UU.; Canadá más adelante). Presupuesto inicial sugerido 20-30 $/día.
+- Tareas: guiones de 3-5 vídeos (pareja harta / boca seca / unboxing + cómo se pone / cinta en V autocuidado),
+  textos de anuncio en inglés, imágenes verticales 9:16 con IA, instalar la app de TikTok (píxel) en Shopify,
+  proponer pack de 2 uds para subir lo que deja cada pedido.
+- Reglas: sin promesas médicas, sin antes/después, sin testimonios inventados.
