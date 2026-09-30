@@ -2,16 +2,16 @@
 
 - Tienda: jib2y1-i4.myshopify.com
 - Carpeta de trabajo: tiendas/hushwell/tema (tema base Dawn 16.0.0, descargado 2026-09-30)
-- Tema de trabajo: "Hushwell (Claude)", ID 191618580804 (NO publicado)
+- Tema: "Hushwell (Claude)", ID 191618580804 — PUBLICADO (30-sep-2026). Los push siguientes necesitan --allow-live
 - Vista previa: https://jib2y1-i4.myshopify.com/?preview_theme_id=191618580804
-- Tema publicado actual: "MŌA Pets – NYC Boutique (EN)" (ID 191526961476), sin tocar
+- Tema anterior guardado: "MŌA Pets – NYC Boutique (EN)" (ID 191526961476)
 - Entorno (nube): Node 22, Shopify CLI 4.8.3. Ejecutar el CLI con NODE_USE_ENV_PROXY=1.
   Hay que crear un /usr/local/bin/xdg-open vacío para que el inicio de sesión no falle.
 - Red permitida: *.myshopify.com, cdn.shopify.com, accounts.shopify.com, admin.shopify.com
 
 ## Fases
 - [x] 0 Entorno  - [x] 1 Conexión  - [x] 2 Proyecto  - [x] 3 Brief
-- [x] 4 Construcción  - [x] 5 Producto y páginas  - [x] 6 Subido (sin publicar, a la espera del OK)
+- [x] 4 Construcción  - [x] 5 Producto y páginas  - [x] 6 Publicado
 
 ## Catálogo
 - Producto único: gid://shopify/Product/15695532196164
@@ -53,4 +53,3 @@
 - [ ] Rellenar las políticas (Configuración → Políticas) para enlazarlas desde el pie de página
 - [ ] Confirmar que ofrece envío gratis a EE. UU. y garantía de 30 noches (lo dice la web); si no, cambiar esos textos
 - [ ] Revisar la moneda de la tienda (USD) y los mercados (Configuración → Mercados)
-- [ ] Dar el OK para publicar el tema
