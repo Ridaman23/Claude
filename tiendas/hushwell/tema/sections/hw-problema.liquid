@@ -21,7 +21,25 @@
       {%- if section.settings.imagen != blank -%}
         {{ section.settings.imagen | image_url: width: 1200 | image_tag: loading: 'lazy', sizes: '(min-width: 990px) 50vw, 100vw' }}
       {%- else -%}
-        <img src="{{ 'hw-antes-despues.jpg' | asset_url }}" alt="{{ section.settings.titulo | escape }}" width="800" height="800" loading="lazy">
+        <div class="hw-ilus" role="img" aria-label="{{ section.settings.ilus_antes | escape }} / {{ section.settings.ilus_despues | escape }}">
+          <div class="hw-ilus__lado hw-ilus__lado--antes">
+            <span class="hw-ilus__tag">{{ section.settings.ilus_antes_tag }}</span>
+            <div class="hw-ilus__cara">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width="3"/><path d="M40 50q6-5 12 0M68 50q6-5 12 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><ellipse cx="60" cy="80" rx="9" ry="11" fill="currentColor"/></svg>
+            </div>
+            <div class="hw-ilus__ondas" aria-hidden="true">{%- assign hs = '18,34,52,28,58,40,22,48,30' | split: ',' -%}{%- for h in hs -%}<i style="--i:{{ forloop.index }};--h:{{ h }}px"></i>{%- endfor -%}</div>
+            <p class="hw-ilus__texto">{{ section.settings.ilus_antes }}</p>
+          </div>
+          <div class="hw-ilus__lado hw-ilus__lado--despues">
+            <span class="hw-ilus__tag">{{ section.settings.ilus_despues_tag }}</span>
+            <div class="hw-ilus__cara">
+              <svg viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="44" fill="none" stroke="currentColor" stroke-width="3"/><path d="M40 50q6-5 12 0M68 50q6-5 12 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M50 80q10 5 20 0" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M30 99q30 18 60 0" fill="none" stroke="#C3B4F2" stroke-width="5" stroke-linecap="round"/></svg>
+              <span class="hw-ilus__z">z<small>z</small><small>z</small></span>
+            </div>
+            <div class="hw-ilus__ondas hw-ilus__ondas--calma" aria-hidden="true">{%- assign hs = '18,34,52,28,58,40,22,48,30' | split: ',' -%}{%- for h in hs -%}<i style="--i:{{ forloop.index }};--h:{{ h }}px"></i>{%- endfor -%}</div>
+            <p class="hw-ilus__texto">{{ section.settings.ilus_despues }}</p>
+          </div>
+        </div>
       {%- endif -%}
     </div>
     <div class="hw-problema__texto">
@@ -48,7 +66,11 @@
     { "type": "text", "id": "eyebrow", "label": "Texto pequeño superior", "default": "Why you snore" },
     { "type": "text", "id": "titulo", "label": "Título", "default": "When your mouth drops open, the snoring starts." },
     { "type": "textarea", "id": "texto", "label": "Texto", "default": "As you fall asleep, your jaw relaxes and your mouth falls open. Air rushes over the soft tissue at the back of your throat — and it vibrates. That's the sound keeping the whole room awake." },
-    { "type": "image_picker", "id": "imagen", "label": "Imagen" },
+    { "type": "image_picker", "id": "imagen", "label": "Imagen (vacío = ilustración antes/después)" },
+    { "type": "text", "id": "ilus_antes_tag", "label": "Ilustración – etiqueta izquierda", "default": "Mouth open" },
+    { "type": "text", "id": "ilus_antes", "label": "Ilustración – texto izquierda", "default": "Air rushes in. Tissue vibrates. Snoring." },
+    { "type": "text", "id": "ilus_despues_tag", "label": "Ilustración – etiqueta derecha", "default": "With Hushwell" },
+    { "type": "text", "id": "ilus_despues", "label": "Ilustración – texto derecha", "default": "Mouth closed. Nose breathing. Quiet." },
     { "type": "checkbox", "id": "imagen_derecha", "label": "Imagen a la derecha (en ordenador)", "default": false },
     { "type": "color", "id": "color_fondo", "label": "Color de fondo", "default": "#F7F3EC" },
     { "type": "header", "content": "Tipografía" },

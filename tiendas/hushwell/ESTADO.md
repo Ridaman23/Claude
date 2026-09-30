@@ -61,4 +61,5 @@
   snippet hw-precio muestra precio rebajado, tachado y "-20%"; se apaga solo después de promo_fin
 - Barra superior: "Launch Sale: 20% off everything — ends Oct 14 · Free US shipping" → CAMBIAR al terminar la oferta
 - Foto con marca "HIEERBUS" quitada de la cinta en V
-- Políticas redactadas (scratchpad pol.json) — pendiente de permiso write_legal_policies para guardarlas
+- Políticas guardadas (envíos con plazos EE. UU. 7-14 / Canadá 8-16 días laborables, devoluciones 30 días, privacidad, términos, contacto)
+- Portada: foto "No more sleep disruption" sustituida por ilustración CSS (hw-ilus) en hw-problema
