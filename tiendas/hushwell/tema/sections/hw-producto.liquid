@@ -50,9 +50,23 @@
         <div class="hw-prod__valor"><span>{% render 'hw-icono', nombre: 'luna' %}</span>{{ section.settings.subtitulo }}</div>
       {%- endif -%}
 
+      {%- assign nota = product.metafields.reviews.rating.value -%}
+      {%- assign num_resenas = product.metafields.reviews.rating_count.value | default: 0 -%}
+      {%- if section.settings.mostrar_estrellas and nota != blank and num_resenas > 0 -%}
+        {%- assign nota_pct = nota.rating | times: 100.0 | divided_by: nota.scale_max | round -%}
+        <a class="hw-prod__estrellas" href="#{{ section.settings.ancla_resenas | default: 'judgeme_product_reviews' }}">
+          <span class="hw-estrellas-nota" style="--nota: {{ nota_pct }}%;" aria-hidden="true">★★★★★</span>
+          <span>{{ nota.rating | round: 1 }} · {{ num_resenas }} {{ section.settings.texto_resenas }}</span>
+        </a>
+      {%- endif -%}
+
       <div class="hw-prod__precio">
         {% render 'hw-precio', precio: variante.price, antes: variante.compare_at_price, clase: 'hw-prod__precio-num' %}
       </div>
+
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}<div class="hw-prod__app" {{ block.shopify_attributes }}>{% render block %}</div>{%- endif -%}
+      {%- endfor -%}
 
       {%- if section.settings.intro != blank -%}
         <p class="hw-prod__intro">{{ section.settings.intro | newline_to_br }}</p>
@@ -107,6 +121,22 @@
         <div>{% render 'hw-icono', nombre: 'candado' %}{{ section.settings.confianza_3 }}</div>
       </div>
 
+      {%- if section.settings.garantia_titulo != blank or section.settings.garantia_texto != blank -%}
+        <div class="hw-prod__garantia">
+          <span class="hw-prod__garantia-icono">{% render 'hw-icono', nombre: 'luna' %}</span>
+          <div>
+            {%- if section.settings.garantia_titulo != blank -%}<strong>{{ section.settings.garantia_titulo }}</strong>{%- endif -%}
+            {%- if section.settings.garantia_texto != blank -%}<p>{{ section.settings.garantia_texto }}</p>{%- endif -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- if section.settings.mostrar_pagos and shop.enabled_payment_types.size > 0 -%}
+        <ul class="hw-prod__pagos" aria-label="Payment methods">
+          {%- for tipo in shop.enabled_payment_types -%}<li>{{ tipo | payment_type_svg_tag }}</li>{%- endfor -%}
+        </ul>
+      {%- endif -%}
+
       <div class="hw-prod__detalles">
         <details {% if section.settings.abrir_descripcion %}open{% endif %}>
           <summary>{{ section.settings.titulo_descripcion }}</summary>
@@ -159,6 +189,15 @@
     { "type": "text", "id": "confianza_1", "label": "Garantía 1", "default": "Free US shipping" },
     { "type": "text", "id": "confianza_2", "label": "Garantía 2", "default": "30-night guarantee" },
     { "type": "text", "id": "confianza_3", "label": "Garantía 3", "default": "Secure checkout" },
+    { "type": "header", "content": "Garantía y pagos" },
+    { "type": "text", "id": "garantia_titulo", "label": "Título de la caja de garantía (vacío = ocultar)", "default": "30-night sleep guarantee" },
+    { "type": "textarea", "id": "garantia_texto", "label": "Texto de la caja de garantía", "default": "Sleep on it for 30 nights. If you're not happy, contact us and we'll refund you." },
+    { "type": "checkbox", "id": "mostrar_pagos", "label": "Mostrar logos de métodos de pago", "default": true },
+    { "type": "header", "content": "Reseñas" },
+    { "type": "paragraph", "content": "Las estrellas aparecen solas cuando el producto tiene reseñas reales (por ejemplo, de la app Judge.me). Sin reseñas no se muestra nada." },
+    { "type": "checkbox", "id": "mostrar_estrellas", "label": "Mostrar estrellas bajo el título", "default": true },
+    { "type": "text", "id": "texto_resenas", "label": "Texto tras el número de reseñas", "default": "reviews" },
+    { "type": "text", "id": "ancla_resenas", "label": "Ancla del bloque de reseñas (avanzado)", "default": "judgeme_product_reviews" },
     { "type": "header", "content": "Desplegables" },
     { "type": "text", "id": "titulo_descripcion", "label": "Título de la descripción", "default": "Description" },
     { "type": "checkbox", "id": "abrir_descripcion", "label": "Descripción abierta al cargar", "default": false },
@@ -177,6 +216,7 @@
     { "type": "header", "content": "Espaciado" },
     { "type": "range", "id": "padding_top", "label": "Espacio superior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 48 },
     { "type": "range", "id": "padding_bottom", "label": "Espacio inferior (px)", "min": 0, "max": 160, "step": 8, "unit": "px", "default": 80 }
-  ]
+  ],
+  "blocks": [{ "type": "@app" }]
 }
 {% endschema %}
